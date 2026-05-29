@@ -5,7 +5,6 @@ import MQTTService from './src/services/mqttService'
 import StatusModal from './src/components/StatusModal'
 import LightControl from './src/components/LightControl'
 import Gauges from './src/components/Gauges';
-import { parse } from 'react-native-svg';
 
 const mqtt = new MQTTService();
 
@@ -29,7 +28,7 @@ export default function App() {
     startConnection();
   }, []);
 
-  const startConnetion = () => {
+  const startConnection = () => {
     setshowError(false)
     mqtt.connect(
       mqttConfig,
@@ -67,7 +66,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '121212',
+    backgroundColor: '#121212',
     padding: 20,
     alignItems: 'center',
   },

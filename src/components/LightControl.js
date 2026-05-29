@@ -8,12 +8,12 @@ export default function LightControl({ isLightOn, onToggle }) {
             <TouchableOpacity onPress={onToggle}>
                 <Icon name={isLightOn ? 'lightbulb-on' : 'lightbulb-outline'} size={100} color={isLightOn ? '#f1c40f' : '#555'} />
             </TouchableOpacity>
-            <Text style={style.label}>{isLightOn ? 'Luz Ligada' : 'Luz Desligada'}</Text>
+            <Text style={styles.label}>{isLightOn ? 'Luz Ligada' : 'Luz Desligada'}</Text>
         </View >
     );
 }
 
-    const styles = StyleSheet.create({
-        card: { backgroundColor: '#1e1e1e', padding: 30, borderRadius: 20, alignItems: 'center', width: '100%', marginBottom: 30 },
-        label: { color: '#aaa', marginTop: 10, fontSize: 14 },
-    })
+const styles = StyleSheet.create({
+    card: { backgroundColor: '#1e1e1e', padding: 30, borderRadius: 20, alignItems: 'center', width: '100%', marginBottom: 30 },
+    label: { color: '#aaa', marginTop: 10, fontSize: 14 },
+})

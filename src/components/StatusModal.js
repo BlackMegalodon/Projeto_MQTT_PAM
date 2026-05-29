@@ -12,11 +12,11 @@ const StatusModal = ({ visible, onRetry, onLater }) => {
                     </Text>
 
                     <TouchableOpacity style={styles.btnRetry} onPress={onRetry}>
-                        <Text style={btnText}>Tentar Novamente</Text>
+                        <Text style={styles.btnText}>Tentar Novamente</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.btnLater} onPress={onLater}>
-                        <Text style={btnText}>Tentar mais tarde</Text>
+                        <Text style={styles.btnText}>Tentar mais tarde</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -26,7 +26,7 @@ const StatusModal = ({ visible, onRetry, onLater }) => {
 
 const styles = StyleSheet.create({
 
-    modalContainer: { flex: 1, backgroundColor: 'rgba(0,0,0.85)', justifyContent: 'center', alignItems: 'center' },
+    modalContainer: { flex: 1, backgroundColor: 'rgba(0,0,0,0.85)', justifyContent: 'center', alignItems: 'center' },
 
     modalContent: { backgroundColor: '#222', padding: 30, borderRadius: 20, width: '85%', alignItems: 'center', borderWidth: 1, borderColor: '#333' },
 
