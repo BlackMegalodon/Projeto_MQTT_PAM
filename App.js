@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {env} from 'expo-env'
+import { StorageService } from './src/services/StorageService';
 import { StyleSheet, Text, View } from 'react-native';
 import MQTTService from './src/services/mqttService'
 import StatusModal from './src/components/StatusModal'
@@ -25,6 +26,19 @@ export default function App() {
   };
 
   useEffect(() => {
+    const carregardados = async () => {
+    const savedTemp = await StorageService.getData('casa/temp');
+    const savedHum = await StorageService.getData('casa/umid');
+    const savedLight = await StorageService.getData('casa/luz');
+
+    if (savedTemp) setTemp(parseFloat(savedTemp));
+    if (savedHum) setHum(parseFloat(savedHum));
+    if (savedLight) setIsLightOn(savedLight === '1');
+  }
+    carregardados();
+   }, []);
+
+  useEffect(() => {
     startConnection();
   }, []);
 
@@ -33,9 +47,15 @@ export default function App() {
     mqtt.connect(
       mqttConfig,
       (topic, message) => {
-        if (topic === 'casa/temp') settemp(parseFloat(message))
-        if (topic === 'casa/umid') sethum(parseFloat(message))
-        if (topic === 'casa/luz') setisLightOn(message === '1')
+        if (topic === 'casa/temp') settemp(parseFloat(message)); await StorageService.storeData('casa/temp', message);
+        if (topic === 'casa/umid') sethum(parseFloat(message)); await StorageService.storeData('casa/umid', message);
+        if (topic === 'casa/luz') setisLightOn(message === '1'); await StorageService.storeData('casa/luz', message);
+      },
+      () => {
+        isConnected(true)
+        mqtt.subscribe('casa/temp');
+        mqtt.subscribe('casa/umid');
+        mqtt.subscribe('casa/luz');
       },
     (err) => {
       setisConnected(false)
